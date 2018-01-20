@@ -1,2 +1,2 @@
-# TerminTwitter
-Bring your tweets back in time!
+# RetroTwitter
+Bring your tweets back to a more rad time!
