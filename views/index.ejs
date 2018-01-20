@@ -4,7 +4,7 @@
     <title>RetroTwitter</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
@@ -16,6 +16,7 @@
             Bring your tweets back to a radder time!
         </h3>
     </div>
+
     <div class="row">
         <div class="col-lg-3"></div>
         <div class="col-lg-6">
@@ -23,12 +24,25 @@
                 <div class="input-group input-group-lg">
                     <input type="text" class="form-control" id="searchbox" name="q" placeholder="Twitter Handle">
                     <span class="input-group-btn">
-                        <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                        <button class="btn btn-primary" type="submit" onclick="clickHandler()"><i class="fa fa-search"></i></button>
+                        <script>
+                            function clickHandler() {
+                              // Do something
+                            }
+                        </script>
                     </span>
                 </div>
             </form>
         </div>
         <div class="col-lg-3"></div>
+    </div>
+
+    <div>
+        <ul>
+            <% tweets.forEach(function(tweet){ %>
+                <li> <img src="<%=tweet.user.profile_image_url%>">  <%= tweet.full_text %></li>
+            <%  }); %>
+        </ul>
     </div>
   </body>
 </html>
