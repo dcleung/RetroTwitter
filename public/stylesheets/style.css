@@ -1,8 +1,118 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.large-title {
+    margin-top: 50px;
+    margin-bottom: 0px;
+    font: 500 75px/1.3 'Oleo Script', Helvetica, sans-serif;
+    color: #2b2b2b;
+    text-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+    text-align: center;
 }
-
-a {
-  color: #00B7FF;
+.mid-title {
+    margin-top: 50px;
+    margin-bottom: 0px;
+    font: 300 70px/1.3 'Oleo Script', Helvetica, sans-serif;
+    color: #2b2b2b;
+    text-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+    text-align: center;
+}
+.small-title {
+    font: 100 25px/1.3 'Oleo Script', Helvetica, sans-serif;
+    color: #2b2b2b;
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 40px;
+}
+.analyze-bar {
+    height: 40;
+}
+.tab-content{
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+.navbar { 
+    background-color: #F3F1F3;
+    margin-bottom: 0;
+    text-align:center;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-40%);
+}
+.item {
+    -webkit-animation-duration: 1s;
+    -webkit-animation-delay;
+}
+.input-group {
+    text-align: center;
+    border-color: #E7E7E7;
+}
+.result {
+    background-color: #E7E7E7;
+    height: 600px;
+}
+.close {
+    padding:10px;
+}
+body {
+    background: #add8e6; /* fallback for old browsers */
+} 
+#myChart {
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: 190px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    max-width: 500px;
+    max-height: 500px;
+}
+#loading {
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: 190px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+.header {
+   background-color: darken($baseColor, 5%);
+   color: black;
+   font-size: 1.5em;
+   padding: 1rem;
+   text-align: center;
+   font-family: 'Tahoma', serif;
+}
+img {
+   border-radius: 50%;
+   height: 70px;
+   width: 70px;
+}
+.center {
+    text-align: center;
+    color: #333;
+    padding: 10px;
+}
+.table-users {
+   border: 1px solid darken($baseColor, 5%);
+   border-radius: $borderRadius;
+   max-width: calc(100% - 2em);
+   margin: 1em auto;
+   overflow: hidden;
+   width: 800px;
+}
+.target-pic {
+    margin-top: 55px;
+    margin-left: 60%;
+}
+@media screen and (max-width: 700px) {   
+   table, tr, td { display: block; }
+   
+   
+   .table-users { 
+      border: none; 
+      box-shadow: none;
+      overflow: visible;
+      text-align: center;
+   }
 }
