@@ -1,5 +1,5 @@
 # RetroTwitter
-Bring your tweets back to a more rad time!
+Bring your tweets back to a radder time!
 ## Usage
 ```
 npm install
