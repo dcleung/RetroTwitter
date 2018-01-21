@@ -23,7 +23,6 @@
             <form id="searchform" method="get" accept-charset="utf-8">
                 <div class="input-group input-group-lg">
                     <span class ="input-group-btn">
-                        <!--<button name="subject" type="submit" value="fav_HTML">HTML</button>-->
                         <button class="btn btn-primary" type="text" value="text">@<i class="fa font-awesome"></meter></i></button>
                     </span>
                     <input type="text" class="form-control" id="searchbox" name="q" placeholder="Twitter Handle">
@@ -36,10 +35,11 @@
         <div class="col-lg-3"></div>
     </div>
 
-    <div>
-        <ul>
+    <div class="center">
+        <br>
+        <ul class="list-group">
             <% tweets.forEach(function(tweet){ %>
-                <li> <img src="new.jpeg" width=150 height=150>  <%= tweet.full_text %></li>
+                <li class="list-group-item tweet"> <img src="new.jpeg" width=150 height=150>  <%= tweet.full_text %></li>
                 <br>
             <%  }); %>
         </ul>

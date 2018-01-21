@@ -9,6 +9,9 @@ var request = require('request');
 
 var translate = require('./dictionary.json')
 
+// Maximum number of tweets to appear (keep small for testing purposes)
+var MAX_COUNT = 10;
+
 AWS.config = {
   "accessKeyId": credentials.aws_access_key,
   "secretAccessKey": credentials.aws_secret_key,
@@ -59,6 +62,7 @@ function replacePic(data) {
     var leftEyeY = 0;
     var rightEyeX = 0;
     var rightEyeY = 0;
+    var width = data.FaceDetails[0].BoundingBox.Width;
 
     data.FaceDetails[0].Landmarks.forEach(function(landmark) {
         if (landmark.Type === 'eyeLeft') {
@@ -73,28 +77,30 @@ function replacePic(data) {
     });
 
     if (leftEyeX && leftEyeY && leftEyeX && leftEyeY) {
-
-        var newX = 50; 
-        var newY = 50;
+        var distance = rightEyeX - leftEyeX;
+        var avgX = (rightEyeX + leftEyeX) / 2;
+        var avgY = (rightEyeY + leftEyeY) / 2;
+        var newX = avgX * 250 - 72; 
+        var newY = avgY * 250 - 80;
+        console.log("( " + newX + ", " + newY + ")");
+        console.log(distance);
 
         // Compute where to put the afro image
 
         // Have JIMP read the afro image
         Jimp.read("./routes/resources/afro1.png", function (err, overlay) {
             if (!err) {
+                // Alter the overlay image
+                overlay.scale(distance * 0.80);
                 // Have JIMP read the image for the Twitter profile
                 var params = {Bucket: 'pennbook-my-images', Key: 'current.png'};
                 var url = s3.getSignedUrl('getObject', params);
                 //console.log('The URL is', url);
                 Jimp.read(url, function (err, profile) {
                     if (!err) {
-                        profile.composite(overlay, newX, newY); 
+                        profile.resize(250, 250).composite(overlay, newX, newY); 
                         var file = "./public/new." + profile.getExtension();
                         profile.write(file)
-                        /*image.write(path, function(err) {
-                            if (err) console.log(err);
-                        });
-                        console.log("successful composite");*/
                     } else {
                         console.log(err);
                     }
@@ -104,11 +110,7 @@ function replacePic(data) {
             }
         });
     }
-    console.log(data.FaceDetails[0].Landmarks);
 }
-
-// Maximum number of tweets to appear (keep small for testing purposes)
-var MAX_COUNT = 20;
  
 // Initialize the Twitter API Keys
 var client = new Twitter({
@@ -132,10 +134,9 @@ router.get('/', function(req, res, next) {
             retTweets.push(tweet);
         });
 
-        let promise = convertPic(tweets[0].user.profile_image_url);
+        convertPic(tweets[0].user.profile_image_url);
 
         res.render('index', { tweets: retTweets});
-
       } else {
         console.log(error);
       }

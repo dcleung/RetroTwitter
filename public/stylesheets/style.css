@@ -1,6 +1,26 @@
 .fa {
   border-radius: 4px;
 }
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10%;
+}
+.tweet {
+  display: inline-block;
+  font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 20px;
+  border-color: #eee #ddd #bbb;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  margin: 10px 5px;
+  padding: 0 16px 16px 16px;
+  max-width: 800px;
+}
 .large-title {
     margin-top: 50px;
     margin-bottom: 0px;
