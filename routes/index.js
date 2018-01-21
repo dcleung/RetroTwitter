@@ -80,7 +80,7 @@ function replacePic(data) {
         // Compute where to put the afro image
 
         // Have JIMP read the afro image
-        Jimp.read("http://pbs.twimg.com/profile_images/880285750872428546/nM435x8_.jpg", function (err, overlay) {
+        Jimp.read("./routes/resources/afro1.png", function (err, overlay) {
             if (!err) {
                 // Have JIMP read the image for the Twitter profile
                 var params = {Bucket: 'pennbook-my-images', Key: 'current.png'};
@@ -135,6 +135,7 @@ router.get('/', function(req, res, next) {
         let promise = convertPic(tweets[0].user.profile_image_url);
 
         res.render('index', { tweets: retTweets});
+
       } else {
         console.log(error);
       }
