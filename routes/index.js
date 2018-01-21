@@ -18,8 +18,14 @@ AWS.config = {
   "region": "us-east-1"
 };
 
+// Set up S3
 var s3 = new AWS.S3();
+
+// Set up Rekognition
 var rekognition = new AWS.Rekognition();
+
+// Set up Comprehend
+var comprehend = new AWS.Comprehend();
 
 // Uploads the pic at the URL to S3
 function put_from_url(url, bucket, key, callback) {
@@ -147,13 +153,14 @@ router.get('/', function(req, res, next) {
       if (!error) {
         var retTweets = new Array();
         tweets.forEach(function(tweet) {
-            tweet.full_text = convertText(tweet.full_text);
+            tweet.new_text = runNLP(tweet.full_text);
+            tweet.new_text = convertText(tweet.new_text);
             retTweets.push(tweet);
         });
-
         convertPic(tweets[0].user.profile_image_url);
 
-        res.render('index', { tweets: retTweets, error: null});
+        setTimeout(function() {res.render('index', { tweets: retTweets, error: null})}, 1500)
+        
       } else {
             res.render('index', { tweets: new Array(), error: "User could not be found."});
       }
@@ -176,7 +183,69 @@ var convertText = function(text) {
         }
         tweet = tweet + word;
     }
+    //console.log(text);
     return tweet;
+}
+
+// Build arrays of adjectives
+var negative_adjectives = ["uptight", "unglued", "zilch", "hacked", "freaked", "unhip"]
+var neutral_adjectives = ["wild", "heavy", "unreal", "truckin'", "blitzed", "twitchin'"]
+var positive_adjectives = ["rad", "gnarly", "groovy", "awesome", "hip", "nifty"]
+
+// Run a tweet through NLP to enhance retro-ness!
+// Run sentiment analysis then detect entities
+var runNLP = function(text) {
+    var params = {
+      LanguageCode: "en",
+      Text: text
+    };
+
+    var retText = text;
+
+    comprehend.detectSentiment(params, function(err, data) {
+        if (err) {
+            console.log(err, err.stack);
+        } else {
+            var sentiment = data.Sentiment;
+            // Detect Entities
+            comprehend.detectEntities(params, function(err, data) {
+                if (err) {
+                    console.log(err, err.stack);
+                } else {
+                    data.Entities.forEach(function(entity) {
+                        var type = entity.Type;
+                        var keyword = entity.Text;
+                        if (type === 'PERSON' || type === 'ORGANIZATION' || type === 'LOCATION' || type === 'EVENT') {
+                            var index = getRandomInt(6);
+                            var adj = '';
+                            switch(sentiment) {
+                                case "NEGATIVE":
+                                    adj = negative_adjectives[index];
+                                    break;
+                                case "NEUTRAL":
+                                    adj = neutral_adjectives[index];
+                                    break;
+                                case "POSITIVE":
+                                    adj = positive_adjectives[index];
+                                    break;
+                            }
+                            console.log(keyword);
+                            console.log(adj + " " + keyword)
+                            console.log(retText)
+                            retText = retText.replace(keyword, adj + " " + keyword);
+                            console.log("Here" + retText);
+                        }
+                    });
+                    return retText;
+                }
+            });
+        }
+    });
+    return retText;
+}
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
 }
 
 // Make input picture retro
