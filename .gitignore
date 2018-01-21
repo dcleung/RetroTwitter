@@ -59,4 +59,4 @@ typings/
 
 # Hide Twitter API Keys
 config.json
-
+aws_config.json
