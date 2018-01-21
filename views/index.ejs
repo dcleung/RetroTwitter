@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Shrikhand">
   </head>
-  <body>
+  <body style="background: linear-gradient(to right, #0066ff, #3399ff)">
     <div>
         <h1 class = "large-title"  style = "font-family: Shrikhand">
             RetroTwitter
         </h1>
-        <h3 class = "small-title">
+        <h3 class = "small-title" style="font-size: 20px; font-weight:bold">
             Bring your tweets back to a radder time!
         </h3>
     </div>
@@ -23,12 +23,12 @@
         <div class="col-lg-6"> 
             <form id="searchform" method="get" accept-charset="utf-8">
                 <div class="input-group input-group-lg">
-                    <span class ="input-group-btn">
+                    <!--<span class ="input-group-btn">
                         <button class="btn btn-primary" type="text" value="text">@<i class="fa font-awesome"></meter></i></button>
-                    </span>
+                    </span>-->
                     <input type="text" class="form-control" id="searchbox" name="q" placeholder="Twitter Handle">
                     <span class="input-group-btn">
-                        <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                        <button class="btn btn-primary" type="submit" style="border:none"><i class="fa fa-search"></i></button>
                     </span>
                 </div>
             </form>
@@ -36,11 +36,22 @@
         <div class="col-lg-3"></div>
     </div>
 
+    <div>
+        <p class = "small-title" style = "font-weight:bold"> <%= error %> </p>
+    </div>
+
     <div class="center">
-        <br>
         <ul class="list-group">
             <% tweets.forEach(function(tweet){ %>
-                <li class="list-group-item tweet"> <img src="new.jpeg" width=150 height=150>  <div><%= tweet.full_text %></div></li>
+                <li class="list-group-item tweet"> 
+                    <table class>
+                        <th></th>
+                        <tr>
+                            <td><img src="new.jpeg" width=150 height=150></td>
+                            <td> <%= tweet.full_text %></td>
+                        </tr>
+                    </table>
+                </li>
                 <br>
             <%  }); %>
         </ul>

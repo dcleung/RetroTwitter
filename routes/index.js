@@ -62,6 +62,21 @@ function replacePic(data) {
     var leftEyeY = 0;
     var rightEyeX = 0;
     var rightEyeY = 0;
+
+    // Case with no faces
+   if (!data.FaceDetails[0]) {
+        var params = {Bucket: 'pennbook-my-images', Key: 'current.png'};
+        var url = s3.getSignedUrl('getObject', params);
+         Jimp.read(url, function (err, profile) {
+            if (!err) {
+                var file = "./public/new." + profile.getExtension();
+                profile.write(file)
+            } else {
+                console.log(err);
+            }
+        });
+        return;
+    }
     var width = data.FaceDetails[0].BoundingBox.Width;
 
     data.FaceDetails[0].Landmarks.forEach(function(landmark) {
@@ -77,16 +92,17 @@ function replacePic(data) {
     });
 
     if (leftEyeX && leftEyeY && leftEyeX && leftEyeY) {
+        // Have JIMP read the afro image
         var distance = rightEyeX - leftEyeX;
         var avgX = (rightEyeX + leftEyeX) / 2;
         var avgY = (rightEyeY + leftEyeY) / 2;
+
+        // Get the regression factor
         var scaling = distance * 5.5;
         var newX = (avgX * 1759 - (1759 * scaling / 2)); 
         var newY = (avgY * 1759 - 1000 * scaling);
         console.log("( " + newX + ", " + newY + ")");
         console.log(distance);
-
-        // Compute where to put the afro image
 
         // Have JIMP read the afro image
         Jimp.read("./routes/resources/afro1.png", function (err, overlay) {
@@ -137,9 +153,9 @@ router.get('/', function(req, res, next) {
 
         convertPic(tweets[0].user.profile_image_url);
 
-        res.render('index', { tweets: retTweets});
+        res.render('index', { tweets: retTweets, error: null});
       } else {
-        console.log(error);
+            res.render('index', { tweets: new Array(), error: "User could not be found."});
       }
     });
 });

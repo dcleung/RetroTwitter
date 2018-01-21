@@ -1,3 +1,6 @@
+a.btn:hover{
+     background: #383;
+}
 .fa {
   border-radius: 4px;
 }
@@ -18,7 +21,7 @@
   border-width: 1px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
   margin: 10px 5px;
-  padding: 0 16px 16px 16px;
+  padding: 10%;
   max-width: 800px;
 }
 .large-title {
@@ -108,6 +111,8 @@ body {
 }
 img {
    border-radius: 10%;
+   text-align: left;
+   align-content: left;
 }
 .center {
     text-align: center;
