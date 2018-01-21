@@ -10,7 +10,7 @@ var request = require('request');
 var translate = require('./dictionary.json')
 
 // Maximum number of tweets to appear (keep small for testing purposes)
-var MAX_COUNT = 10;
+var MAX_COUNT = 50;
 
 AWS.config = {
   "accessKeyId": credentials.aws_access_key,
@@ -166,10 +166,10 @@ var convertText = function(text) {
     var tweet = "";
     for(var i = 0; i < words.length; i++){
         var word = words[i];
-        if(word[word.legnth-1] === "."){
+        if(word[word.length-1] === "."){
             word = words[i].substring(0, word.length-1);
             word = (translate[word] ? translate[word] : word);
-            word = word + ".";
+            word = word + ". ";
         } else {
             word = (translate[word] ? translate[word] : word);
             word = word + " ";
