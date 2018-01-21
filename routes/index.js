@@ -157,9 +157,13 @@ router.get('/', function(req, res, next) {
             tweet.new_text = convertText(tweet.new_text);
             retTweets.push(tweet);
         });
-        convertPic(tweets[0].user.profile_image_url);
+        if (!tweets[0]) {
+            res.render('index', { tweets: new Array(), error: "User could not be found."});
+        } else {
+            convertPic(tweets[0].user.profile_image_url);
+        }
 
-        setTimeout(function() {res.render('index', { tweets: retTweets, error: null})}, 1500)
+        setTimeout(function() {res.render('index', { tweets: retTweets, error: null})}, 2000)
         
       } else {
             res.render('index', { tweets: new Array(), error: "User could not be found."});
