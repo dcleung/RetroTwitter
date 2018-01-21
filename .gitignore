@@ -60,3 +60,7 @@ typings/
 # Hide Twitter API Keys
 config.json
 aws_config.json
+
+# Temp Folder
+.tmp
+new.jpeg

@@ -28,7 +28,7 @@
                     </span>
                     <input type="text" class="form-control" id="searchbox" name="q" placeholder="Twitter Handle">
                     <span class="input-group-btn">
-                        <button class="btn btn-primary" type="submit" onclick="clickHandler()"><i class="fa fa-search"></i></button>
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
                     </span>
                 </div>
             </form>
@@ -39,7 +39,7 @@
     <div>
         <ul>
             <% tweets.forEach(function(tweet){ %>
-                <li> <img src="<%=profile%>" width=150 height=150>  <%= tweet.full_text %></li>
+                <li> <img src="new.jpeg" width=150 height=150>  <%= tweet.full_text %></li>
                 <br>
             <%  }); %>
         </ul>
