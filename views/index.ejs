@@ -6,10 +6,11 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Shrikhand">
   </head>
   <body>
     <div>
-        <h1 class = "large-title">
+        <h1 class = "large-title"  style = "font-family: Shrikhand">
             RetroTwitter
         </h1>
         <h3 class = "small-title">
@@ -39,7 +40,7 @@
         <br>
         <ul class="list-group">
             <% tweets.forEach(function(tweet){ %>
-                <li class="list-group-item tweet"> <img src="new.jpeg" width=150 height=150>  <%= tweet.full_text %></li>
+                <li class="list-group-item tweet"> <img src="new.jpeg" width=150 height=150>  <div><%= tweet.full_text %></div></li>
                 <br>
             <%  }); %>
         </ul>

@@ -1,5 +1,7 @@
  {
     "children" : "ankle biters",
+    "big" : "gnarly",
+    "good" : "groovy",
     "awesome" : "bad",
     "sore throat" : "bad pipes",
     "steal" : "bag",
@@ -60,7 +62,9 @@
     "the best" : "gasser",
     "handshake" : "gimme some skin",
     "obstacle" : "glitch",
-    "cool" : "groovy",
+    "cool" : "hip",
+    "awesome" : "hip",
+    "shoes" : "kicks",
     "nice" : "groovy",
     "money" : "green",
     "disgusting" : "grody",

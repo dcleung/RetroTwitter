@@ -80,8 +80,9 @@ function replacePic(data) {
         var distance = rightEyeX - leftEyeX;
         var avgX = (rightEyeX + leftEyeX) / 2;
         var avgY = (rightEyeY + leftEyeY) / 2;
-        var newX = avgX * 250 - 72; 
-        var newY = avgY * 250 - 80;
+        var scaling = distance * 5.5;
+        var newX = (avgX * 1759 - (1759 * scaling / 2)); 
+        var newY = (avgY * 1759 - 1000 * scaling);
         console.log("( " + newX + ", " + newY + ")");
         console.log(distance);
 
@@ -91,14 +92,14 @@ function replacePic(data) {
         Jimp.read("./routes/resources/afro1.png", function (err, overlay) {
             if (!err) {
                 // Alter the overlay image
-                overlay.scale(distance * 0.80);
+                overlay.scale(scaling);
                 // Have JIMP read the image for the Twitter profile
                 var params = {Bucket: 'pennbook-my-images', Key: 'current.png'};
                 var url = s3.getSignedUrl('getObject', params);
                 //console.log('The URL is', url);
                 Jimp.read(url, function (err, profile) {
                     if (!err) {
-                        profile.resize(250, 250).composite(overlay, newX, newY); 
+                        profile.resize(1759, 1759).composite(overlay, newX, newY); 
                         var file = "./public/new." + profile.getExtension();
                         profile.write(file)
                     } else {
